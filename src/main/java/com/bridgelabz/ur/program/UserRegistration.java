@@ -1,5 +1,5 @@
 /**
- * should clear all email samples provided separately
+ * Validating first name, last name, email-id, phone number & Password.
  *
  * 
  * @author: Navya Shree
@@ -12,23 +12,28 @@ import java.util.regex.Pattern;
 
 public class UserRegistration {
 
-	public static void main(String[] args) {
-		String[] validEmailSample = { "abc@yahoo.com", "abc-100@yahoo.com", "abc.100@yahoo.com", "abc111@abc.com",
-				"abc-100@abc.net", "abc.100@abc.com.au", "abc@1.com", "abc@gmail.com.com", "abc+100@gmail.com" };
-		String[] invalidEmailSample = { "abc", "abc@.com.my", "abc123@gmail.a", "abc123@.com", "abc123@.com.com",
-				".abc@abc.com", "abc()*@gmail.com", "abc@%*.com", "abc..2002@gmail.com", "abc.@gmail.com",
-				"abc@abc@gmail.com", "abc@gmail.com.1a", "abc@gmail.com.aa.au" };
+	private static final String NAME = "[A-Z][a-z]{2,}";
+	private static final String EMAIL = "^(abc)[.][a-z]+[@](bl)[.](co)[.][a-z]+$";
+	private static final String PHONE_NUMBER = "^[\\d]{2}[\\s][\\d]{10}$";
+	private static final String PASSWORD = "^(?=.*[A-Z])(?=.*[a-z])(?=[^!@#$%^&+=]*[!@#$%^&+=][^!@#$%^&+=]*$)(?=.*[0-9]).{8,}$";
 
-		System.out.println("Valid email :");
-		emailValidate(validEmailSample);
-		System.out.println("\nInvalid emails :");
-		emailValidate(invalidEmailSample);
+	public boolean firstNameValidate(String fName) {
+		return Pattern.matches(NAME, fName);
 	}
 
-	public static void emailValidate(String[] emails) {
-		for (int i = 0; i < emails.length; i++) {
-			System.out.print(
-					Pattern.matches("^[\\w+_-]+(?:\\.[\\w+_-]+)*[@][\\w]{1,}([.]{1}[a-z]{2,}){1,2}$", emails[i]) + " ");
-		}
+	public boolean lastNameValidate(String lName) {
+		return Pattern.matches(NAME, lName);
+	}
+
+	public boolean emailValidate(String email) {
+		return Pattern.matches(EMAIL, email);
+	}
+
+	public boolean phoneNumberValidate(String phNum) {
+		return Pattern.matches(PHONE_NUMBER, phNum);
+	}
+
+	public boolean passwordValidate(String pw) {
+		return Pattern.matches(PASSWORD, pw);
 	}
 }
