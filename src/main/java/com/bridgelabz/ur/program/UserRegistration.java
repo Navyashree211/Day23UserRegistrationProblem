@@ -1,6 +1,6 @@
 /**
-* User need to follow pre-defined password rules.
- * Rules1- minimum 8 characters
+ * should clear all email samples provided separately
+ *
  * 
  * @author: Navya Shree
  * @since: 20.10.2021
@@ -8,63 +8,27 @@
 
 package com.bridgelabz.ur.program;
 
+import java.util.regex.Pattern;
+
 public class UserRegistration {
 
 	public static void main(String[] args) {
-		System.out.println(firstName("Navya"));
-		System.out.println(firstName("Anokhi"));
-		System.out.println(lastName("Shree"));
-		System.out.println(lastName("Sha"));
+		String[] validEmailSample = { "abc@yahoo.com", "abc-100@yahoo.com", "abc.100@yahoo.com", "abc111@abc.com",
+				"abc-100@abc.net", "abc.100@abc.com.au", "abc@1.com", "abc@gmail.com.com", "abc+100@gmail.com" };
+		String[] invalidEmailSample = { "abc", "abc@.com.my", "abc123@gmail.a", "abc123@.com", "abc123@.com.com",
+				".abc@abc.com", "abc()*@gmail.com", "abc@%*.com", "abc..2002@gmail.com", "abc.@gmail.com",
+				"abc@abc@gmail.com", "abc@gmail.com.1a", "abc@gmail.com.aa.au" };
 
-		email();
-		phoneNumber();
-		password();
+		System.out.println("Valid email :");
+		emailValidate(validEmailSample);
+		System.out.println("\nInvalid emails :");
+		emailValidate(invalidEmailSample);
 	}
 
-	// validate first name
-	public static boolean firstName(String firstName) {
-
-		return firstName.matches("^[A-Z]{1}[a-z]{2,}$");
-	}
-
-	// validate last name
-	public static boolean lastName(String lastName) {
-		return lastName.matches("[A-z]{1}[a-z]{2,}$");
-	}
-
-	// validate given email
-	public static void email() {
-		String email = "abc.xyz@bl.co.in";
-		String regex = "^[a-z]{3}[a-zA-Z0-9+_.-]*@[a-z]{2}[.]{1}[a-z]{2}[.][a-z]*$";
-		boolean result = email.matches(regex);
-		if (result) {
-			System.out.println("Given email-id is valid");
-		} else {
-			System.out.println("Given email-id is not valid");
-		}
-	}
-
-	// validate given phone number
-	public static void phoneNumber() {
-		String phone = "91 9919819801";
-		String regex = "[0-9]{2}[%s][0-9]{10}";
-		boolean result = phone.matches(regex);
-		if (result) {
-			System.out.println("Given phone number is valid");
-		} else {
-			System.out.println("Given phone number is not valid ");
-		}
-	}
-
-	// validate given password
-	public static void password() {
-		String password = "abcd#123";
-		String regex = "[A-Za-z0-9@_#$%!]{8,}";
-		boolean result = password.matches(regex);
-		if (result) {
-			System.out.println("Given password is valid");
-		} else {
-			System.out.println("Given password is not valid");
+	public static void emailValidate(String[] emails) {
+		for (int i = 0; i < emails.length; i++) {
+			System.out.print(
+					Pattern.matches("^[\\w+_-]+(?:\\.[\\w+_-]+)*[@][\\w]{1,}([.]{1}[a-z]{2,}){1,2}$", emails[i]) + " ");
 		}
 	}
 }
