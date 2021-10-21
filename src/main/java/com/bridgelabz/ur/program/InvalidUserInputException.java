@@ -1,5 +1,5 @@
 /**
- * Regular expression for Email validation.
+ * Using Lambda Expression Validating first name, last name, email-id, phone number & Password.
  *
  * 
  * @author: Navya Shree
